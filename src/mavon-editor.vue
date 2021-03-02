@@ -124,6 +124,10 @@ const xss = require('xss');
 export default {
     mixins: [markdown],
     props: {
+        render_text: {
+            type: String,
+            default: ''
+        },
         scrollStyle: {  // 是否渲染滚动条样式(webkit)
             type: Boolean,
             default: true
@@ -643,7 +647,11 @@ export default {
         },
         iRender(toggleChange) {
             var $vm = this;
-            this.$render($vm.d_value, function(res) {
+            let render_text = $vm.d_value
+            if ($vm.render_text) {
+                render_text = $vm.render_text
+            }
+            this.$render(render_text, function(res) {
                 // render
                 $vm.d_render = res;
                 // change回调  toggleChange == false 时候触发change回调
