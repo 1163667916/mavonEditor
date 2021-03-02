@@ -14,7 +14,7 @@ const VueMavonEditor = {
     LeftToolbar: require('./components/md-toolbar-left'),
     RightToolbar: require('./components/md-toolbar-right'),
     install: function(Vue) {
-        Vue.component('mavon-editor', mavonEditor);
+        Vue.component('mavon-editor-custom', mavonEditor);
     }
 };
 
