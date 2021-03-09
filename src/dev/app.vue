@@ -28,7 +28,7 @@
               <input type="text" v-model="imgName" />
               <button @click="imgdelete">delete</button>
             </div>
-            <mavon-editor ref=md :subfield="subfield" :toolbarsFlag="toolbarsFlag" :editable="editable"
+            <mavon-editor-custom ref=md :subfield="subfield" :toolbarsFlag="toolbarsFlag" :editable="editable"
                           :language="d_language" @change="change" @save="saveone" :ishljs="true" class="item-editor" v-model="help1"
                           :autofocus="autofocus"
                           :shortCut="true"
@@ -39,6 +39,7 @@
                           :scrollStyle="true"
                           :transition="true"
                           box-shadow-style="0 2px 12px 0 rgba(0, 0, 0, 0.1)"
+                          :render_text="RText"
                           toolbars-background="#ffffff"
                           preview-background="#fbfbfb">
                 <!-- <template slot="left-toolbar-before">
@@ -54,7 +55,7 @@
                 <template slot="right-toolbar-after">
                     右工具栏后
                 </template> -->          
-            </mavon-editor>
+            </mavon-editor-custom>
             <button ref="diy" type="button" @click="$click('selftest')" class="op-icon fa fa-mavon-align-left"
                 aria-hidden="true" title="自定义"></button>
         </div>
@@ -83,11 +84,12 @@
     // import {CONFIG} from './assets/config.js'
     import {CONFIG} from '../lib/config.js'
     import axios from 'axios'
-    import {mavonEditor} from '../index'
+    import {mavonEditorCustom} from '../index'
     export default {
         name: 'app',
         data () {
             return {
+                RText: '',
                 d_language: 'zh-CN',
                 help1: '',
                 help2: '',
@@ -250,7 +252,7 @@
                 alert('save two')
             },
             change (val, render) {
-                console.log(val)
+                // console.log(val)
             },
             opchange (event) {
                 this.d_language = event.target.value;
@@ -275,6 +277,13 @@
         watch: {
             d_language: function () {
                 this.initLanguage();
+            },
+            help1: {
+                deep: true,
+                handler: function (v) {
+                    this.RText = v
+                    console.log(this.RText)
+                }
             }
         }
     }

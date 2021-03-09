@@ -678,8 +678,15 @@ export default {
         }
     },
     watch: {
+        render_text: {
+            deep: true,
+            handler: function() {
+                this.iRender()
+            }
+        },
         d_value: function (val, oldVal) {
             this.saveSelectionEndsHistory();
+            // console.log('render_text', this.render_text)
             this.iRender();
         },
         value: function (val, oldVal) {
